@@ -72,7 +72,6 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
     transform:scale(1.18);will-change:transform}
 .koefilm figcaption{font-family:var(--mono);font-size:var(--t-label-s);line-height:1.4;letter-spacing:.14em;text-transform:uppercase;color:rgba(25,43,27,.68)}
 .product-rij{display:flex;flex-direction:column;gap:20px}
-.product-kop{font-family:var(--merk);font-weight:600;font-size:var(--t-h3);line-height:1.25;letter-spacing:-.01em;color:var(--groen);margin:14px 0 -6px}
 .product-film{margin:16px 0 0;display:flex;flex-direction:column;background:#101a11;border:1px solid rgba(212,207,191,.16);
     border-radius:14px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.28)}
 .product-film video{width:100%;height:clamp(220px,30vw,380px);object-fit:cover}
