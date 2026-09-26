@@ -172,11 +172,11 @@
         '.ck-merk i::after{content:"";position:absolute;left:50%;transform:translateX(-50%);top:.09em;width:.17em;height:.17em;border-radius:50%;background:#c8524a}',
         '.ck-tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(212,207,191,.45)}',
         /* schermen */
-        '.ck-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px 14px;border-bottom:1px solid rgba(212,207,191,.14);background:rgba(212,207,191,.03)}',
-        '.ck-tabs button{font-family:"Baloo 2",sans-serif;font-weight:600;font-size:16px;line-height:1.2;color:rgba(232,228,214,.75);background:rgba(212,207,191,.07);',
-        '    border:1px solid rgba(212,207,191,.2);border-radius:10px;padding:11px 10px 9px;cursor:pointer;transition:background .2s ease-out,color .2s ease-out,border-color .2s ease-out}',
-        '.ck-tabs button:hover{background:rgba(212,207,191,.13);color:#e8e4d6;border-color:rgba(212,207,191,.35)}',
-        '.ck-tabs button.aan{background:#c8524a;border-color:#c8524a;color:#fff}',
+        '.ck-tabs{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(212,207,191,.14)}',
+        '.ck-tabs button{font-family:"Baloo 2",sans-serif;font-weight:600;font-size:14px;line-height:1.2;color:rgba(232,228,214,.7);background:rgba(212,207,191,.05);',
+        '    border:1px solid rgba(212,207,191,.18);border-radius:99px;padding:6px 18px 5px;cursor:pointer;transition:background .2s ease-out,color .2s ease-out,border-color .2s ease-out}',
+        '.ck-tabs button:hover{background:rgba(212,207,191,.11);color:#e8e4d6;border-color:rgba(212,207,191,.32)}',
+        '.ck-tabs button.aan{background:#d4cfbf;border-color:#d4cfbf;color:#101a11}',
         '.ck-view[hidden]{display:none}',
         /* koe: lijst + detail */
         '.ck-romp{display:grid;grid-template-columns:minmax(250px,330px) minmax(0,1fr)}',
@@ -302,7 +302,7 @@
         '@media (max-width:760px){.ck-romp{grid-template-columns:minmax(0,1fr)}.ck-lijst{border-right:0;border-bottom:1px solid rgba(212,207,191,.14)}.ck-rijen{max-height:210px}',
         '    .ck-voer{grid-template-columns:1fr}.ck-ken{grid-template-columns:repeat(3,minmax(0,1fr))}.ck-tellers{grid-template-columns:repeat(2,minmax(0,1fr))}}',
         '@media (max-width:640px){.ck-inkoop-rij{grid-template-columns:1fr auto}.ck-inkoop-rij .eenheid{grid-column:1/-1;margin-top:-4px}}',
-        '@media (max-width:520px){.ck-sig{grid-template-columns:1fr}.ck-detail,.ck-kudde,.ck-koppel{padding:16px}.ck-tabs{gap:6px;padding:10px 12px}.ck-tabs button{font-size:15px;padding:10px 4px 8px}',
+        '@media (max-width:520px){.ck-sig{grid-template-columns:1fr}.ck-detail,.ck-kudde,.ck-koppel{padding:16px}.ck-tabs{padding:10px 12px}.ck-tabs button{flex:1;padding:6px 6px 5px}',
         '    .ck-legende{font-size:8.5px;letter-spacing:0}}'
     ].join('\n');
 
