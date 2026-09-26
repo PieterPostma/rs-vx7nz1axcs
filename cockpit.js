@@ -10,12 +10,15 @@
     function rng(seed) { return function () { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }; }
     var NAMEN = ['Berta 12', 'Sietske 4', 'Nynke 27', 'Marijke 8', 'Aaltje 31', 'Femke 19', 'Rixt 3', 'Tsjerkje 22',
         'Boukje 15', 'Willemke 7', 'Jantsje 40', 'Hiske 11', 'Doutzen 25', 'Grytsje 9', 'Afke 33', 'Lysbeth 17',
-        'Antsje 2', 'Baukje 28', 'Wypkje 14', 'Sjoukje 36', 'Teatske 6', 'Hylkje 21', 'Romkje 30', 'Idske 13'];
+        'Antsje 2', 'Baukje 28', 'Wypkje 14', 'Sjoukje 36', 'Teatske 6', 'Hylkje 21', 'Romkje 30', 'Idske 13',
+        'Geeske 5', 'Trijntje 18', 'Sytske 24', 'Klaske 10', 'Fokje 29', 'Jeltje 16', 'Gerbrich 35', 'Aukje 20',
+        'Tjitske 1', 'Wietske 23', 'Ymkje 34', 'Durkje 26', 'Hinke 38', 'Minke 39', 'Janke 41', 'Sjoerdtje 42'];
     /* het beeld per koe; wie niet genoemd is, zit op haar optimum.
        buffert = herkauwt méér dan normaal: ze buffert haar pens met extra speeksel (vóór de verzuring) */
     var PROFIEL = { 'Sietske 4': 'zuur', 'Doutzen 25': 'zuur', 'Afke 33': 'zuur',
         'Femke 19': 'buffert', 'Teatske 6': 'hoog', 'Baukje 28': 'hoog',
-        'Marijke 8': 'laag', 'Grytsje 9': 'laag', 'Hylkje 21': 'ketose', 'Jantsje 40': 'kreupel' };
+        'Marijke 8': 'laag', 'Grytsje 9': 'laag', 'Hylkje 21': 'ketose', 'Jantsje 40': 'kreupel',
+        'Klaske 10': 'zuur', 'Wietske 23': 'zuur', 'Aukje 20': 'laag', 'Hinke 38': 'laag' };
 
     /* zone op de lat: haar voerbalans t.o.v. haar optimum (kg krachtvoer boven + of onder -) */
     function zone(afst) { return afst < -0.3 ? 'laag' : (afst <= 0.3 ? 'ok' : (afst <= 0.8 ? 'hoog' : 'zuur')); }
@@ -169,11 +172,11 @@
         '.ck-merk i::after{content:"";position:absolute;left:50%;transform:translateX(-50%);top:.09em;width:.17em;height:.17em;border-radius:50%;background:#c8524a}',
         '.ck-tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(212,207,191,.45)}',
         /* schermen */
-        '.ck-tabs{display:flex;gap:4px;padding:0 12px;border-bottom:1px solid rgba(212,207,191,.14)}',
-        '.ck-tabs button{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;background:none;border:0;',
-        '    border-bottom:2px solid transparent;color:rgba(212,207,191,.5);padding:12px 12px 10px;cursor:pointer;transition:color .2s ease-out,border-color .2s ease-out}',
-        '.ck-tabs button:hover{color:rgba(212,207,191,.85)}',
-        '.ck-tabs button.aan{color:#e8e4d6;border-bottom-color:#c8524a}',
+        '.ck-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px 14px;border-bottom:1px solid rgba(212,207,191,.14);background:rgba(212,207,191,.03)}',
+        '.ck-tabs button{font-family:"Baloo 2",sans-serif;font-weight:600;font-size:16px;line-height:1.2;color:rgba(232,228,214,.75);background:rgba(212,207,191,.07);',
+        '    border:1px solid rgba(212,207,191,.2);border-radius:10px;padding:11px 10px 9px;cursor:pointer;transition:background .2s ease-out,color .2s ease-out,border-color .2s ease-out}',
+        '.ck-tabs button:hover{background:rgba(212,207,191,.13);color:#e8e4d6;border-color:rgba(212,207,191,.35)}',
+        '.ck-tabs button.aan{background:#c8524a;border-color:#c8524a;color:#fff}',
         '.ck-view[hidden]{display:none}',
         /* koe: lijst + detail */
         '.ck-romp{display:grid;grid-template-columns:minmax(250px,330px) minmax(0,1fr)}',
@@ -236,6 +239,13 @@
         '.ck-sig svg{display:block;width:100%;height:38px;margin-top:4px}',
         '.ck-bron{margin:-4px 0 0;font-family:"JetBrains Mono",monospace;font-size:9.5px;line-height:1.5;letter-spacing:.03em;color:rgba(212,207,191,.42)}',
         '.ck-vkaart .ck-bron{margin-top:8px}',
+        '.ck-mest{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border:1px dashed rgba(212,207,191,.28);border-radius:9px;padding:12px 14px}',
+        '.ck-mest p{flex:1 1 240px;margin:0;font-size:13px;line-height:1.5;color:rgba(212,207,191,.72)}',
+        '.ck-mest p b{font-weight:400;color:#e8e4d6}',
+        '.ck-mest label{flex:none;display:inline-flex;align-items:center;gap:8px;font-family:"Jost",system-ui,sans-serif;font-weight:400;font-size:13px;color:#101a11;background:#e8e4d6;border-radius:99px;padding:8px 16px;cursor:pointer;transition:background .2s ease-out}',
+        '.ck-mest label:hover{background:#fff}',
+        '.ck-mest input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}',
+        '.ck-mest label:focus-within{outline:2px solid #c8524a;outline-offset:2px}',
         '.ck-sig-voet{margin-top:9px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.04em;color:rgba(212,207,191,.4)}',
         /* optimum-staaf per koe: geel | groen | oranje | rood */
         '.ck-gauge svg{display:block;width:100%;height:auto}',
@@ -292,7 +302,7 @@
         '@media (max-width:760px){.ck-romp{grid-template-columns:minmax(0,1fr)}.ck-lijst{border-right:0;border-bottom:1px solid rgba(212,207,191,.14)}.ck-rijen{max-height:210px}',
         '    .ck-voer{grid-template-columns:1fr}.ck-ken{grid-template-columns:repeat(3,minmax(0,1fr))}.ck-tellers{grid-template-columns:repeat(2,minmax(0,1fr))}}',
         '@media (max-width:640px){.ck-inkoop-rij{grid-template-columns:1fr auto}.ck-inkoop-rij .eenheid{grid-column:1/-1;margin-top:-4px}}',
-        '@media (max-width:520px){.ck-sig{grid-template-columns:1fr}.ck-detail,.ck-kudde,.ck-koppel{padding:16px}.ck-tabs button{padding:12px 8px 10px;letter-spacing:.06em}',
+        '@media (max-width:520px){.ck-sig{grid-template-columns:1fr}.ck-detail,.ck-kudde,.ck-koppel{padding:16px}.ck-tabs{gap:6px;padding:10px 12px}.ck-tabs button{font-size:15px;padding:10px 4px 8px}',
         '    .ck-legende{font-size:8.5px;letter-spacing:0}}'
     ].join('\n');
 
@@ -363,7 +373,7 @@
         if (!wortel) return;
         var stijl = document.createElement('style'); stijl.textContent = css; document.head.appendChild(stijl);
 
-        var koeien = maakKoppel(), filter = 'alle', huidig = koeien[0], scherm = 'koppel';
+        var koeien = maakKoppel(), filter = 'alle', huidig = koeien[0], scherm = 'koe';
         var N = koeien.length;
 
         wortel.innerHTML =
@@ -372,12 +382,12 @@
             '  <div class="ck-alert" role="note"><span class="ico">&#9888;</span>' +
             '<span><b>Hitte-alert &middot; weersverwachting wo &gt;30&nbsp;&deg;C.</b> Alle koeien pensbestendig vet en buffer, tot 14 dagen na de hitte. Vers water, ventilatie en vers voer.</span></div>' +
             '  <nav class="ck-tabs" role="tablist">' +
-            '    <button role="tab" data-s="koppel" class="aan">Koppel</button>' +
-            '    <button role="tab" data-s="koe">Koe</button>' +
+            '    <button role="tab" data-s="koe" class="aan">Koe</button>' +
+            '    <button role="tab" data-s="koppel">Koppel</button>' +
             '    <button role="tab" data-s="voer">Voeradvies</button>' +
             '  </nav>' +
-            '  <div class="ck-view" data-v="koppel"><div class="ck-kudde" id="ckKudde"></div></div>' +
-            '  <div class="ck-view" data-v="koe" hidden><div class="ck-romp">' +
+            '  <div class="ck-view" data-v="koppel" hidden><div class="ck-kudde" id="ckKudde"></div></div>' +
+            '  <div class="ck-view" data-v="koe"><div class="ck-romp">' +
             '    <div class="ck-lijst">' +
             '      <div class="ck-filters">' +
             '        <button data-f="alle" class="aan">Alle</button>' +
@@ -497,6 +507,9 @@
                 tegel('Activiteit &middot; halsband', s.act, spark([{ data: k.act, kleur: lijn(s.act) }], 100, ba[0], ba[1])) +
                 '</div><div class="ck-sig-voet">14 dagen &middot; stippellijn = haar eigen norm (melkgift: verwacht volgens haar lactatiecurve)' +
                 (s.mpr.tekst ? ' &middot; melkcontrole: ' + s.mpr.tekst : '') + '</div></div>' +
+                '<div class="ck-mest"><p><b>Wat zegt haar mest?</b> Dunne mest, lange vezels of hele graankorrels laten zien hoe haar pens verteert. ' +
+                'Met een foto nemen we dat mee in het advies.</p>' +
+                '<label><input type="file" accept="image/*" capture="environment" data-mest>&#128247; Upload foto van de mest</label></div>' +
                 (extra ? '<div class="ck-voer">' + kvKaart + extra + '</div>' : kvKaart);
         }
 
@@ -568,6 +581,11 @@
             wortel.querySelectorAll('.ck-filters button').forEach(function (x) { x.classList.toggle('aan', x.getAttribute('data-f') === filter); });
         }
 
+        ck.addEventListener('change', function (e) {
+            if (!e.target.matches('[data-mest]') || !e.target.files.length) return;
+            meld('Foto ontvangen · demo: de mestanalyse bouwen we met de pilotbedrijven');
+            e.target.value = '';
+        });
         ck.addEventListener('click', function (e) {
             var el;
             if ((el = e.target.closest('.ck-tabs button'))) return toonScherm(el.getAttribute('data-s'));
