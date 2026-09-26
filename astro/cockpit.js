@@ -172,11 +172,18 @@
         '.ck-merk i::after{content:"";position:absolute;left:50%;transform:translateX(-50%);top:.09em;width:.17em;height:.17em;border-radius:50%;background:#c8524a}',
         '.ck-tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(212,207,191,.45)}',
         /* schermen */
-        '.ck-tabs{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(212,207,191,.14)}',
-        '.ck-tabs button{font-family:"Baloo 2",sans-serif;font-weight:600;font-size:14px;line-height:1.2;color:rgba(232,228,214,.7);background:rgba(212,207,191,.05);',
-        '    border:1px solid rgba(212,207,191,.18);border-radius:99px;padding:6px 18px 5px;cursor:pointer;transition:background .2s ease-out,color .2s ease-out,border-color .2s ease-out}',
-        '.ck-tabs button:hover{background:rgba(212,207,191,.11);color:#e8e4d6;border-color:rgba(212,207,191,.32)}',
-        '.ck-tabs button.aan{background:#d4cfbf;border-color:#d4cfbf;color:#101a11}',
+        '.ck-tabbalk{padding:10px 14px;border-bottom:1px solid rgba(212,207,191,.14)}',
+        '.ck-tabs{position:relative;display:inline-flex;padding:3px;border-radius:99px;background:rgba(212,207,191,.07);border:1px solid rgba(212,207,191,.14)}',
+        '.ck-tabs .duim{position:absolute;top:3px;bottom:3px;left:3px;width:0;border-radius:99px;background:#d4cfbf;',
+        '    transition:left .22s cubic-bezier(.25,1,.5,1),width .22s cubic-bezier(.25,1,.5,1)}',
+        '.ck-tabs button{position:relative;font-family:"Baloo 2",sans-serif;font-weight:600;font-size:14px;line-height:1.2;color:rgba(232,228,214,.65);background:none;',
+        '    border:0;border-radius:99px;padding:6px 18px 5px;cursor:pointer;transition:color .22s ease-out}',
+        '.ck-tabs button:hover{color:#e8e4d6}',
+        '.ck-tabs button.aan{color:#101a11}',
+        '.ck-tabs button:focus-visible{outline:2px solid #c8524a;outline-offset:2px}',
+        '.ck-view:not([hidden]){animation:ck-in .22s ease-out}',
+        '@keyframes ck-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}',
+        '@media (prefers-reduced-motion:reduce){.ck-tabs .duim{transition:none}.ck-view:not([hidden]){animation:none}}',
         '.ck-view[hidden]{display:none}',
         /* koe: lijst + detail */
         '.ck-romp{display:grid;grid-template-columns:minmax(250px,330px) minmax(0,1fr)}',
@@ -302,7 +309,7 @@
         '@media (max-width:760px){.ck-romp{grid-template-columns:minmax(0,1fr)}.ck-lijst{border-right:0;border-bottom:1px solid rgba(212,207,191,.14)}.ck-rijen{max-height:210px}',
         '    .ck-voer{grid-template-columns:1fr}.ck-ken{grid-template-columns:repeat(3,minmax(0,1fr))}.ck-tellers{grid-template-columns:repeat(2,minmax(0,1fr))}}',
         '@media (max-width:640px){.ck-inkoop-rij{grid-template-columns:1fr auto}.ck-inkoop-rij .eenheid{grid-column:1/-1;margin-top:-4px}}',
-        '@media (max-width:520px){.ck-sig{grid-template-columns:1fr}.ck-detail,.ck-kudde,.ck-koppel{padding:16px}.ck-tabs{padding:10px 12px}.ck-tabs button{flex:1;padding:6px 6px 5px}',
+        '@media (max-width:520px){.ck-sig{grid-template-columns:1fr}.ck-detail,.ck-kudde,.ck-koppel{padding:16px}.ck-tabbalk{padding:10px 12px}.ck-tabs{display:flex}.ck-tabs button{flex:1;padding:6px 6px 5px}',
         '    .ck-legende{font-size:8.5px;letter-spacing:0}}'
     ].join('\n');
 
@@ -381,11 +388,11 @@
             '  <div class="ck-kop"><span class="ck-merk">rum<i>&#305;</i>nate</span><span class="ck-tag">cockpit &middot; demobedrijf &middot; ' + N + ' koeien</span></div>' +
             '  <div class="ck-alert" role="note"><span class="ico">&#9888;</span>' +
             '<span><b>Hitte-alert &middot; weersverwachting wo &gt;30&nbsp;&deg;C.</b> Alle koeien pensbestendig vet en buffer, tot 14 dagen na de hitte. Vers water, ventilatie en vers voer.</span></div>' +
-            '  <nav class="ck-tabs" role="tablist">' +
+            '  <div class="ck-tabbalk"><nav class="ck-tabs" role="tablist"><span class="duim" aria-hidden="true"></span>' +
             '    <button role="tab" data-s="koe" class="aan">Koe</button>' +
             '    <button role="tab" data-s="koppel">Koppel</button>' +
             '    <button role="tab" data-s="voer">Voeradvies</button>' +
-            '  </nav>' +
+            '  </nav></div>' +
             '  <div class="ck-view" data-v="koppel" hidden><div class="ck-kudde" id="ckKudde"></div></div>' +
             '  <div class="ck-view" data-v="koe"><div class="ck-romp">' +
             '    <div class="ck-lijst">' +
@@ -411,7 +418,17 @@
                 var aan = b.getAttribute('data-s') === s; b.classList.toggle('aan', aan); b.setAttribute('aria-selected', aan);
             });
             wortel.querySelectorAll('.ck-view').forEach(function (v) { v.hidden = v.getAttribute('data-v') !== s; });
+            zetDuim();
         }
+        /* het bolletje schuift naar de actieve knop */
+        function zetDuim() {
+            var b = wortel.querySelector('.ck-tabs button.aan'), duim = wortel.querySelector('.ck-tabs .duim');
+            if (!b || !duim) return;
+            duim.style.left = b.offsetLeft + 'px';
+            duim.style.width = b.offsetWidth + 'px';
+        }
+        window.addEventListener('resize', zetDuim);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(zetDuim);
 
         /* ---------- scherm 1: de koppel ---------- */
         (function () {
