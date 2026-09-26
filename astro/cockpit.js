@@ -263,6 +263,24 @@
         '.ck-zwerm svg{display:block;width:100%;height:auto}',
         '.ck-zwerm circle.k{cursor:pointer;transition:r .15s ease-out}',
         '.ck-zwerm circle.k:hover{stroke:#e8e4d6;stroke-width:2.5}',
+        '.ck-lijnen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 16px}',
+        '.ck-lijn{min-width:0}',
+        '.ck-lijn .kop{display:flex;justify-content:space-between;align-items:baseline;gap:8px}',
+        '.ck-lijn h6{margin:0;font-family:"JetBrains Mono",monospace;font-weight:400;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(212,207,191,.5)}',
+        '.ck-lijn .w{font-size:13px;color:#e8e4d6;white-space:nowrap}',
+        '.ck-lijn .w small{font-family:"JetBrains Mono",monospace;font-size:10px;color:rgba(212,207,191,.45)}',
+        '.ck-lijn .vlak{position:relative;margin-top:4px}',
+        '.ck-lijn .as{position:absolute;left:0;font-family:"JetBrains Mono",monospace;font-size:9px;color:rgba(212,207,191,.38);pointer-events:none}',
+        '.ck-lijn .as.max{top:0}.ck-lijn .as.min{bottom:2px}',
+        '.ck-lijn svg{display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y}',
+        '.ck-lijn .grid{stroke:rgba(212,207,191,.1);stroke-width:1}',
+        '.ck-lijn .reeks{fill:none;stroke:#d4cfbf;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}',
+        '.ck-lijn .punt{fill:#d4cfbf;stroke:#141f15;stroke-width:2}',
+        '.ck-lijn .gids{stroke:rgba(212,207,191,.35);stroke-width:1;opacity:0}',
+        '.ck-lijn .focus{fill:#e8e4d6;stroke:#141f15;stroke-width:2}',
+        '.ck-lijn .vang{fill:transparent;cursor:crosshair}',
+        '.ck-lijn .x{display:flex;justify-content:space-between;margin-top:3px;padding-left:10.5%;font-family:"JetBrains Mono",monospace;font-size:9.5px;color:rgba(212,207,191,.42)}',
+        '@media (max-width:640px){.ck-lijnen{grid-template-columns:1fr}}',
         '.ck-hint{margin:6px 0 0;font-size:12.5px;color:rgba(212,207,191,.5)}',
         '.ck-tellers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}',
         '.ck-teller{border-radius:9px;padding:10px 12px;border:1px solid rgba(212,207,191,.12);background:rgba(212,207,191,.03)}',
@@ -357,21 +375,45 @@
     /* smal scherm: kleinere tekenbreedte en bredere bakken, zodat de stippen groot genoeg blijven om aan te tikken */
     function zwerm(koeien, smal) {
         var W = smal ? 320 : 560, X = schaal(W), bak = smal ? 0.2 : 0.1;
-        var R = 8, STAP = 18, bakken = {}, hoogste = 0;
+        var R = smal ? 7 : 6, STAP = smal ? 15 : 13, bakken = {}, hoogste = 0;
         var stippen = koeien.map(function (k, i) {
             var b = Math.round((Math.max(-1.55, Math.min(1.55, k.afst)) + 1.6) / bak);
             var n = bakken[b] = (bakken[b] || 0) + 1;
             hoogste = Math.max(hoogste, n);
             return { k: k, i: i, x: X(b * bak - 1.6), n: n };
         });
-        var H = hoogste * STAP + 14, basis = H - 4;
-        return '<svg viewBox="0 0 ' + W + ' ' + (H + 26) + '" role="img" aria-label="Alle koeien op hun positie t.o.v. hun eigen optimum">' +
-            latVakken(X, W, basis + 6, 14, [0.8, 0.62, 0.72]) +
+        var H = hoogste * STAP + 10, basis = H - 4;
+        return '<svg viewBox="0 0 ' + W + ' ' + (H + 20) + '" role="img" aria-label="Alle koeien op hun positie t.o.v. hun eigen optimum">' +
+            latVakken(X, W, basis + 6, 10, [0.8, 0.62, 0.72]) +
             stippen.map(function (s) {
                 return '<circle class="k" data-i="' + s.i + '" cx="' + s.x.toFixed(1) + '" cy="' + (basis - (s.n - 1) * STAP - R + 2) +
                     '" r="' + R + '" fill="' + KLEUR[s.k.zone] + '" stroke="#101a11" stroke-width="2"><title>' + s.k.naam + '</title></circle>';
             }).join('') + '</svg>' + LEGENDE;
     }
+
+    /* lijngrafiek voor de koppel: één reeks, eigen as, hover toont waarde en datum */
+    var LW = 300, LH = 96;
+    function lijnGrafiek(id, titel, pts, eenheid, dec, stippen) {
+        var ys = pts.map(function (p) { return p.y; });
+        var min = Math.min.apply(null, ys), max = Math.max.apply(null, ys), marge = (max - min) * 0.15 || 0.1;
+        min -= marge; max += marge;
+        function X(i) { return 32 + i * (LW - 38) / (pts.length - 1); }
+        function Y(v) { return LH - 8 - (v - min) / (max - min) * (LH - 16); }
+        var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(p.y).toFixed(1); }).join(' ');
+        var laatste = pts[pts.length - 1];
+        function waarde(p) { return nl(p.y, dec) + eenheid + ' <small>' + p.x + '</small>'; }
+        LIJNEN[id] = { pts: pts, X: X, Y: Y, waarde: waarde };
+        return '<div class="ck-lijn" data-lijn="' + id + '"><div class="kop"><h6>' + titel + '</h6><span class="w">' + waarde(laatste) + '</span></div>' +
+            '<div class="vlak"><span class="as max">' + nl(max, dec) + '</span><span class="as min">' + nl(min, dec) + '</span>' +
+            '<svg viewBox="0 0 ' + LW + ' ' + LH + '" role="img" aria-label="' + titel + '">' +
+            '<line x1="32" x2="' + (LW - 6) + '" y1="8" y2="8" class="grid"/><line x1="32" x2="' + (LW - 6) + '" y1="' + (LH - 8) + '" y2="' + (LH - 8) + '" class="grid"/>' +
+            '<path d="' + d + '" class="reeks"/>' +
+            (stippen ? pts.map(function (p, i) { return '<circle cx="' + X(i).toFixed(1) + '" cy="' + Y(p.y).toFixed(1) + '" r="3.5" class="punt"/>'; }).join('') : '') +
+            '<line class="gids" x1="0" x2="0" y1="4" y2="' + (LH - 4) + '"/><circle class="focus" r="4.5" cx="' + X(pts.length - 1).toFixed(1) + '" cy="' + Y(laatste.y).toFixed(1) + '"/>' +
+            '<rect class="vang" x="0" y="0" width="' + LW + '" height="' + LH + '"/></svg></div>' +
+            '<div class="x"><span>' + pts[0].x + '</span><span>' + laatste.x + '</span></div></div>';
+    }
+    var LIJNEN = {};
 
     function rangtel(n) { return n + 'e'; }
 
@@ -438,12 +480,42 @@
             var dH = gem(function (k) { return (gem3(k.herkauw) / k.normH - 1) * 100; });
             var nZuur = tel.zuur;
             var vlaggen = koeien.filter(function (k) { return VLAG[k.profiel]; });
+            /* melkgift: laatste 14 dagen = gemiddelde van de koeien; daarvoor 10 weken koppelhistorie uit de robot,
+               met de hittegolf van half augustus (opname zakt snel, herstelt langzaam) */
+            var rh = rng(4242), melkReeks = [];
+            var recent = []; for (var d = 0; d < 14; d++) recent.push(gem(function (k) { return k.melk[d]; }));
+            for (var t = 83; t >= 14; t--) {
+                var y = recent[0] - 0.9 * (t - 14) / 70 + Math.sin(t * 0.9) * 0.08 + (rh() - 0.5) * 0.14;
+                if (t <= 42 && t > 38) y -= (42 - t) * 0.35;                 // hitte: gift zakt snel
+                else if (t <= 38 && t >= 24) y -= 1.4 * (t - 24) / 14;     // en herstelt langzaam
+                melkReeks.push({ x: datumTerug(t), y: y });
+            }
+            recent.forEach(function (y, d) { melkReeks.push({ x: datumTerug(13 - d), y: y }); });
+            /* vet en eiwit: zes melkcontroles; de laatste drie zijn de gemiddelden van de koeien zelf */
+            var MPR6 = [150, 122, 94].concat(MPR_DAGEN);
+            function mprGem(terug, veld) {
+                var w = koeien.map(function (k) { return k.mpr.filter(function (m) { return m.datum === datumTerug(terug); })[0]; }).filter(Boolean);
+                return w.reduce(function (s, m) { return s + m[veld]; }, 0) / w.length;
+            }
+            var vetReeks = MPR6.map(function (terug, j) {
+                var y = j < 3 ? mprGem(66, 'vet') + [0.24, 0.14, 0.03][j] : mprGem(terug, 'vet');
+                return { x: datumTerug(terug), y: y };
+            });
+            var eiwReeks = MPR6.map(function (terug, j) {
+                var y = j < 3 ? mprGem(66, 'eiwit') + [0.06, 0.03, -0.01][j] : mprGem(terug, 'eiwit');
+                return { x: datumTerug(terug), y: y };
+            });
             wortel.querySelector('#ckKudde').innerHTML =
                 '<div class="ck-paneel ck-zwerm"><h5>De koppel &middot; elke stip is één koe, t.o.v. haar eigen optimum &middot; modelschatting</h5><div id="ckZwerm"></div>' +
                 '<p class="ck-hint">Klik op een stip voor haar kengetallen en advies.</p></div>' +
                 '<div class="ck-tellers">' + ['laag', 'ok', 'hoog', 'zuur'].map(function (z) {
                     return '<div class="ck-teller ' + z + '"><b>' + tel[z] + '</b><span>' + ZONE_LBL[z] + '</span></div>';
                 }).join('') + '</div>' +
+                '<div class="ck-paneel"><h5>Ontwikkeling koppel</h5><div class="ck-lijnen">' +
+                lijnGrafiek('melk', 'Melkgift &middot; robot', melkReeks, ' kg', 1, false) +
+                lijnGrafiek('vet', 'Vet &middot; melkcontrole', vetReeks, '%', 2, true) +
+                lijnGrafiek('eiwit', 'Eiwit &middot; melkcontrole', eiwReeks, '%', 2, true) +
+                '</div><p class="ck-bron" style="margin-top:8px">Melkgift: gemiddelde per koe per dag, 12 weken &middot; vet en eiwit: koppelgemiddelde per melkcontrole</p></div>' +
                 '<div class="ck-ken">' +
                 '<div><span>Melk</span><b>' + nl(gem(function (k) { return gem3(k.melk); })) + ' kg</b></div>' +
                 '<div><span>Vet</span><b>' + nl(gem(function (k) { return k.mpr[k.mpr.length - 1].vet; }), 2) + '%</b></div>' +
@@ -598,6 +670,19 @@
             wortel.querySelectorAll('.ck-filters button').forEach(function (x) { x.classList.toggle('aan', x.getAttribute('data-f') === filter); });
         }
 
+        function lijnHover(e, weg) {
+            var svg = e.target.closest && e.target.closest('.ck-lijn svg'); if (!svg) return;
+            var blok = svg.closest('.ck-lijn'), L = LIJNEN[blok.getAttribute('data-lijn')];
+            var r = svg.getBoundingClientRect(), n = L.pts.length;
+            var i = weg ? n - 1 : Math.max(0, Math.min(n - 1, Math.round(((e.clientX - r.left) / r.width * LW - 32) / (LW - 38) * (n - 1))));
+            var p = L.pts[i], x = L.X(i).toFixed(1), y = L.Y(p.y).toFixed(1);
+            var gids = svg.querySelector('.gids'), focus = svg.querySelector('.focus');
+            gids.setAttribute('x1', x); gids.setAttribute('x2', x); gids.style.opacity = weg ? 0 : 1;
+            focus.setAttribute('cx', x); focus.setAttribute('cy', y);
+            blok.querySelector('.w').innerHTML = L.waarde(p);
+        }
+        ck.addEventListener('pointermove', function (e) { lijnHover(e, false); });
+        ck.addEventListener('pointerout', function (e) { if (e.target.classList && e.target.classList.contains('vang')) lijnHover(e, true); });
         ck.addEventListener('change', function (e) {
             if (!e.target.matches('[data-mest]') || !e.target.files.length) return;
             meld('Foto ontvangen · demo: de mestanalyse bouwen we met de pilotbedrijven');
