@@ -266,19 +266,23 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
     .knop,.knop:hover,.lid,.lid:hover{transform:none;transition:none}
 }
 /* product: wat de cockpit laat zien, met uitsnedes (de cockpit zelf staat op cockpit.html) */
-.cp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:56px}
-.cp-kaart{min-width:0;background:#efecdf;border:2px solid rgba(25,43,27,.08);border-radius:26px;padding:12px 12px 26px;display:flex;flex-direction:column}
-.cp-beeld{background:#101a11;border-radius:17px;height:240px;display:flex;align-items:center;justify-content:center;padding:12px;overflow:hidden}
+.cp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:48px}
+.cp-kaart{min-width:0;background:#efecdf;border:2px solid rgba(25,43,27,.08);border-radius:22px;padding:10px 10px 20px;display:flex;flex-direction:column}
+.cp-beeld{background:#101a11;border-radius:14px;height:150px;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
 .cp-beeld img{display:block;min-width:0;max-width:100%;max-height:100%;width:auto;height:auto}
-.cp-kaart .nr{font-family:var(--mono);font-size:var(--t-label-s);letter-spacing:.14em;color:var(--rood-diep);margin:22px 14px 0}
-.cp-kaart h3{font-family:var(--merk);font-weight:600;font-size:var(--t-h3);line-height:1.25;letter-spacing:-.01em;margin:6px 14px 0}
-.cp-kaart p{font-size:var(--t-body);line-height:1.55;color:rgba(25,43,27,.7);margin:8px 14px 0}
-.cp-meer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:18px}
-.cp-meer div{border:2px dashed rgba(71,98,79,.4);border-radius:20px;padding:20px 22px}
+.cp-kaart .nr{font-family:var(--mono);font-size:var(--t-label-s);letter-spacing:.14em;color:var(--rood-diep);margin:16px 12px 0}
+.cp-kaart h3{font-family:var(--merk);font-weight:600;font-size:1.1875rem;line-height:1.25;letter-spacing:-.01em;margin:4px 12px 0}
+.cp-kaart ul{list-style:none;margin:10px 12px 0;padding:0}
+.cp-kaart li{font-size:var(--t-body-s);line-height:1.5;color:rgba(25,43,27,.72);padding:6px 0 0 20px;position:relative}
+.cp-kaart li::before{content:"";position:absolute;left:0;top:.75em;width:10px;height:2px;background:var(--sage-tekst)}
+.cp-kaart li b{font-weight:500;color:var(--groen)}
+.cp-meer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.cp-meer div{border:2px dashed rgba(71,98,79,.4);border-radius:18px;padding:16px 18px}
 .cp-meer h4{font-family:var(--mono);font-size:var(--t-label-s);line-height:1.4;letter-spacing:.14em;text-transform:uppercase;color:var(--sage-tekst)}
-.cp-meer p{font-size:var(--t-body-s);line-height:1.55;color:rgba(25,43,27,.72);margin-top:6px}
-.cp-cta{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-top:40px}
+.cp-meer p{font-size:var(--t-body-s);line-height:1.5;color:rgba(25,43,27,.72);margin-top:6px}
+.cp-cta{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-top:36px}
 .cp-cta .knop{margin-top:0}
 .cp-login{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.08em;color:var(--groen);text-underline-offset:4px}
-.cp-noot{margin-top:16px;font-family:var(--mono);font-size:var(--t-label-s);letter-spacing:.1em;color:rgba(25,43,27,.5)}
-@media (max-width:760px){.cp-grid,.cp-meer{grid-template-columns:minmax(0,1fr)}.cp-beeld{height:auto;max-height:300px}}
+.cp-noot{margin-top:14px;font-family:var(--mono);font-size:var(--t-label-s);letter-spacing:.1em;color:rgba(25,43,27,.5)}
+@media (max-width:960px){.cp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.cp-grid,.cp-meer{grid-template-columns:minmax(0,1fr)}.cp-beeld{height:auto;max-height:220px}}
