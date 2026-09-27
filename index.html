@@ -278,9 +278,9 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
     .knop,.knop:hover,.lid,.lid:hover{transform:none;transition:none}
 }
 /* product: wat de cockpit laat zien, met uitsnedes (de cockpit zelf staat op cockpit.html) */
-.cp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:48px}
+.cp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:48px}
 .cp-kaart{min-width:0;background:#efecdf;border:2px solid rgba(25,43,27,.08);border-radius:22px;padding:10px 10px 20px;display:flex;flex-direction:column}
-.cp-beeld{background:#101a11;border-radius:14px;height:150px;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
+.cp-beeld{background:#101a11;border-radius:14px;height:190px;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
 .cp-beeld img{display:block;min-width:0;max-width:100%;max-height:100%;width:auto;height:auto}
 .cp-kaart .nr{font-family:var(--mono);font-size:var(--t-label-s);letter-spacing:.14em;color:var(--rood-diep);margin:16px 12px 0}
 .cp-kaart h3{font-family:var(--merk);font-weight:600;font-size:1.1875rem;line-height:1.25;letter-spacing:-.01em;margin:4px 12px 0}
@@ -296,7 +296,6 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
 .cp-cta .knop{margin-top:0}
 .cp-login{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.08em;color:var(--groen);text-underline-offset:4px}
 .cp-noot{margin-top:14px;font-family:var(--mono);font-size:var(--t-label-s);letter-spacing:.1em;color:rgba(25,43,27,.5)}
-@media (max-width:960px){.cp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.cp-grid,.cp-meer{grid-template-columns:minmax(0,1fr)}.cp-beeld{height:auto;max-height:220px}}
 </style>
 </head>
@@ -332,8 +331,8 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
     <section class="blok" id="probleem" style="padding-top:6vh">
         <div class="binnen">
             <div class="kicker">Het probleem</div>
-            <h2 class="reveal">Niet elke koe presteert <span class="r">optimaal</span>.</h2>
-            <p class="intro reveal">E&eacute;n voertabel voor de hele koppel, terwijl iedere koe haar eigen ideale zone heeft. Zit ze daarboven of daaronder, dan blijft er rendement liggen.</p>
+            <h2 class="reveal">Geen koe is <span class="r">gemiddeld</span>.</h2>
+            <p class="intro reveal">Toch krijgt de hele koppel dezelfde voertabel. Iedere koe heeft haar eigen ideale zone; zit ze daarboven of daaronder, dan blijft er rendement liggen.</p>
             <div class="lat-wrap reveal">
                 <div class="lat-schaal" aria-hidden="true">
                     <span class="s-min">&larr;&nbsp;weinig krachtvoer</span><span class="s-max">veel krachtvoer&nbsp;&rarr;</span>
@@ -369,12 +368,10 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
             <h2 class="reveal">Dit is de <span class="r">cockpit</span>.</h2>
             <p class="intro reveal">Wat je melkrobot, halsband en melkcontrole al meten, vertaald naar wat je vandaag per koe kunt doen. Voor de koe, voor de hele koppel, en voor het rantsoen.</p>
             <div class="cp-grid reveal">
-                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/lat.webp?v=1" alt="Balk met de voerbalans van één koe: te weinig energie, optimum, te veel, verzuurt" loading="lazy"></div><div class="nr">Per koe</div><h3>Haar eigen optimum</h3><ul><li><b>Je ziet:</b> Of ze te weinig energie krijgt, goed zit, of te veel krachtvoer en richting verzuring gaat.</li><li><b>Je hebt:</b> Je stuurt per koe, niet op het gemiddelde van de koppel.</li></ul></article>
-                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/signalen.webp?v=1" alt="Twee signalen van één koe ten opzichte van haar norm: melkgift en herkauwen" loading="lazy"></div><div class="nr">Per koe</div><h3>Waarom ze afwijkt</h3><ul><li><b>Je ziet:</b> Melkgift, herkauwen en melkcontrole naast haar eigen normaal.</li><li><b>Je hebt:</b> Je weet of het aan het voer ligt, of aan iets anders, vóór je ingrijpt.</li></ul></article>
-                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/advies.webp?v=1" alt="Adviesblok: krachtvoer van 4,0 naar 3,2 kg per dag" loading="lazy"></div><div class="nr">Per koe</div><h3>Wat je vandaag doet</h3><ul><li><b>Je ziet:</b> Hoeveel krachtvoer erbij of eraf aan de robot, met de reden.</li><li><b>Je hebt:</b> Geen alarm zonder actie: je weet meteen wat je instelt.</li></ul></article>
-                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/kudde.webp?v=1" alt="Stippengrafiek van de koppel" loading="lazy"></div><div class="nr">De koppel</div><h3>Alle koeien in één beeld</h3><ul><li><b>Je ziet:</b> Elke stip een koe; hoeveel goed zitten en welke aandacht vragen.</li><li><b>Je hebt:</b> In één blik zie je waar je tijd vandaag naartoe moet.</li></ul></article>
-                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/trend.webp?v=1" alt="Lijngrafiek van de gemiddelde melkgift over twaalf weken" loading="lazy"></div><div class="nr">De koppel</div><h3>Hoe je koppel zich ontwikkelt</h3><ul><li><b>Je ziet:</b> Melkgift, vet en eiwit over de afgelopen maanden.</li><li><b>Je hebt:</b> Je ziet het effect van een rantsoenwissel of hittegolf terug.</li></ul></article>
-                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/inkoop.webp?v=1" alt="Inkooplijst voor een maand, met hoeveelheden per product" loading="lazy"></div><div class="nr">Voeradvies</div><h3>Advies met inkooplijst</h3><ul><li><b>Je ziet:</b> Maandelijks rantsoenadvies voor het voerhek, doorgerekend naar kilo's en zakken voor jouw koppel.</li><li><b>Je hebt:</b> Deel het met je voeradviseur, of koop zelf in bij wie jij wilt. Onafhankelijk van wie het voer verkoopt.</li></ul></article>
+                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/lat.webp?v=1" alt="Balk met de voerbalans van één koe: te weinig energie, optimum, te veel, verzuurt" loading="lazy"></div><div class="nr">Per koe</div><h3>Haar eigen optimum</h3><ul><li><b>Wat je ziet:</b> Of ze te weinig energie krijgt, goed zit, of te veel krachtvoer en richting verzuring gaat.</li><li><b>Wat je ziet:</b> Waaróm ze afwijkt: melkgift, herkauwen en melkcontrole naast haar eigen normaal.</li><li><b>Wat het je oplevert:</b> Je stuurt per koe in plaats van op het gemiddelde, en je weet of het aan het voer ligt vóór je ingrijpt.</li></ul></article>
+                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/advies.webp?v=1" alt="Adviesblok: krachtvoer van 4,0 naar 3,2 kg per dag" loading="lazy"></div><div class="nr">Per koe</div><h3>Wat je vandaag doet</h3><ul><li><b>Wat je ziet:</b> Hoeveel krachtvoer erbij of eraf aan de robot, met de reden.</li><li><b>Wat je ziet:</b> Wanneer je iets anders moet doen dan aan het voer draaien.</li><li><b>Wat het je oplevert:</b> Geen alarm zonder actie: je weet meteen wat je instelt.</li></ul></article>
+                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/kudde.webp?v=1" alt="Stippengrafiek van de koppel" loading="lazy"></div><div class="nr">De koppel</div><h3>Alle koeien in één beeld</h3><ul><li><b>Wat je ziet:</b> Elke stip een koe; hoeveel goed zitten en welke aandacht vragen.</li><li><b>Wat je ziet:</b> Melkgift, vet en eiwit van de koppel over de afgelopen maanden.</li><li><b>Wat het je oplevert:</b> In één blik zie je waar je tijd vandaag naartoe moet, en of een rantsoenwissel of hittegolf doorwerkt.</li></ul></article>
+                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/inkoop.webp?v=1" alt="Inkooplijst voor een maand, met hoeveelheden per product" loading="lazy"></div><div class="nr">De koppel</div><h3>Advies met inkooplijst</h3><ul><li><b>Wat je ziet:</b> Maandelijks rantsoenadvies voor het voerhek, doorgerekend naar kilo's en zakken voor jouw koppel.</li><li><b>Wat het je oplevert:</b> Deel het met je voeradviseur, of koop zelf in bij wie jij wilt. Onafhankelijk van wie het voer verkoopt.</li></ul></article>
             </div>
             <div class="cp-meer reveal">
                 <div><h4>Foto van de mest</h4><p>Upload een foto van de mest en we nemen het mestbeeld mee in het advies.</p></div>

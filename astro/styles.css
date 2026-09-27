@@ -266,9 +266,9 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
     .knop,.knop:hover,.lid,.lid:hover{transform:none;transition:none}
 }
 /* product: wat de cockpit laat zien, met uitsnedes (de cockpit zelf staat op cockpit.html) */
-.cp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:48px}
+.cp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:48px}
 .cp-kaart{min-width:0;background:#efecdf;border:2px solid rgba(25,43,27,.08);border-radius:22px;padding:10px 10px 20px;display:flex;flex-direction:column}
-.cp-beeld{background:#101a11;border-radius:14px;height:150px;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
+.cp-beeld{background:#101a11;border-radius:14px;height:190px;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
 .cp-beeld img{display:block;min-width:0;max-width:100%;max-height:100%;width:auto;height:auto}
 .cp-kaart .nr{font-family:var(--mono);font-size:var(--t-label-s);letter-spacing:.14em;color:var(--rood-diep);margin:16px 12px 0}
 .cp-kaart h3{font-family:var(--merk);font-weight:600;font-size:1.1875rem;line-height:1.25;letter-spacing:-.01em;margin:4px 12px 0}
@@ -284,5 +284,4 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
 .cp-cta .knop{margin-top:0}
 .cp-login{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.08em;color:var(--groen);text-underline-offset:4px}
 .cp-noot{margin-top:14px;font-family:var(--mono);font-size:var(--t-label-s);letter-spacing:.1em;color:rgba(25,43,27,.5)}
-@media (max-width:960px){.cp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.cp-grid,.cp-meer{grid-template-columns:minmax(0,1fr)}.cp-beeld{height:auto;max-height:220px}}
