@@ -280,7 +280,7 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
 /* product: wat de cockpit laat zien, met uitsnedes (de cockpit zelf staat op cockpit.html) */
 .cp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:48px}
 .cp-kaart{min-width:0;background:#efecdf;border:2px solid rgba(25,43,27,.08);border-radius:22px;padding:10px 10px 20px;display:flex;flex-direction:column}
-.cp-beeld{background:#101a11;border-radius:14px;height:190px;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
+.cp-beeld{background:#101a11;border-radius:14px;height:260px;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
 .cp-beeld img{display:block;min-width:0;max-width:100%;max-height:100%;width:auto;height:auto}
 .cp-kaart .nr{font-family:var(--mono);font-size:var(--t-label-s);letter-spacing:.14em;color:var(--rood-diep);margin:16px 12px 0}
 .cp-kaart h3{font-family:var(--merk);font-weight:600;font-size:1.1875rem;line-height:1.25;letter-spacing:-.01em;margin:4px 12px 0}
@@ -296,7 +296,7 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
 .cp-cta .knop{margin-top:0}
 .cp-login{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.08em;color:var(--groen);text-underline-offset:4px}
 .cp-noot{margin-top:14px;font-family:var(--mono);font-size:var(--t-label-s);letter-spacing:.1em;color:rgba(25,43,27,.5)}
-@media (max-width:640px){.cp-grid,.cp-meer{grid-template-columns:minmax(0,1fr)}.cp-beeld{height:auto;max-height:220px}}
+@media (max-width:640px){.cp-grid,.cp-meer{grid-template-columns:minmax(0,1fr)}.cp-beeld{height:auto;max-height:300px}}
 </style>
 </head>
 <body>
@@ -369,7 +369,7 @@ h1 .s,h2 .s{color:var(--sage-d)} .donker h2 .s{color:var(--sage)}
             <p class="intro reveal">Wat je melkrobot, halsband en melkcontrole al meten, vertaald naar wat je vandaag per koe kunt doen. Voor de koe, voor de hele koppel, en voor het rantsoen.</p>
             <div class="cp-grid reveal">
                 <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/lat.webp?v=1" alt="Balk met de voerbalans van één koe: te weinig energie, optimum, te veel, verzuurt" loading="lazy"></div><div class="nr">Per koe</div><h3>Haar eigen optimum</h3><ul><li><b>Wat je ziet:</b> Of ze te weinig energie krijgt, goed zit, of te veel krachtvoer en richting verzuring gaat.</li><li><b>Wat je ziet:</b> Waaróm ze afwijkt: melkgift, herkauwen en melkcontrole naast haar eigen normaal.</li><li><b>Wat het je oplevert:</b> Je stuurt per koe in plaats van op het gemiddelde, en je weet of het aan het voer ligt vóór je ingrijpt.</li></ul></article>
-                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/advies.webp?v=1" alt="Adviesblok: krachtvoer van 4,0 naar 3,2 kg per dag" loading="lazy"></div><div class="nr">Per koe</div><h3>Wat je vandaag doet</h3><ul><li><b>Wat je ziet:</b> Hoeveel krachtvoer erbij of eraf aan de robot, met de reden.</li><li><b>Wat je ziet:</b> Wanneer je iets anders moet doen dan aan het voer draaien.</li><li><b>Wat het je oplevert:</b> Geen alarm zonder actie: je weet meteen wat je instelt.</li></ul></article>
+                <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/advies.webp?v=2" alt="Jantsje 40: activiteit en vreettijd t.o.v. haar norm, krachtvoeradvies en het advies haar klauwen te laten nakijken" loading="lazy"></div><div class="nr">Per koe</div><h3>Wat je vandaag doet</h3><ul><li><b>Wat je ziet:</b> Hoeveel krachtvoer erbij of eraf aan de robot, met de reden.</li><li><b>Wat je ziet:</b> Wanneer je iets anders moet doen dan aan het voer draaien.</li><li><b>Wat het je oplevert:</b> Geen alarm zonder actie: je weet meteen wat je instelt.</li></ul></article>
                 <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/kudde.webp?v=1" alt="Stippengrafiek van de koppel" loading="lazy"></div><div class="nr">De koppel</div><h3>Alle koeien in één beeld</h3><ul><li><b>Wat je ziet:</b> Elke stip een koe; hoeveel goed zitten en welke aandacht vragen.</li><li><b>Wat je ziet:</b> Melkgift, vet en eiwit van de koppel over de afgelopen maanden.</li><li><b>Wat het je oplevert:</b> In één blik zie je waar je tijd vandaag naartoe moet, en of een rantsoenwissel of hittegolf doorwerkt.</li></ul></article>
                 <article class="cp-kaart"><div class="cp-beeld"><img src="media/cockpit/inkoop.webp?v=1" alt="Inkooplijst voor een maand, met hoeveelheden per product" loading="lazy"></div><div class="nr">De koppel</div><h3>Voeradvies</h3><ul><li><b>Wat je ziet:</b> Maandelijks rantsoenadvies voor het voerhek, doorgerekend naar kilo's en zakken voor jouw koppel.</li><li><b>Wat het je oplevert:</b> Je weet zelf wat je koppel nodig heeft, met de cijfers in de hand. Deel het met je voeradviseur, of koop zelf in bij wie jij wilt. Jij hebt het weer in eigen hand.</li></ul></article>
             </div>
